@@ -56,5 +56,24 @@ console.log(quickSort(arr));
 //      return arr;
 //  }
 
+// 附上一个不是原地排序的方法
+function fn(arr) {
+    const baseValue = arr[arr.length - 1];
+    if (arr.length < 2) {
+        return arr;
+    }
+    const left = arr.filter((value, index) => {
+        return value <= baseValue && index !== arr.length - 1;
+    })
+    const right = arr.filter((value, index) => {
+        return value > baseValue;
+    });
+
+    console.log(left, right);
+
+    return [...fn(left), baseValue, ...fn(right)];
+}
+
+
 
 
