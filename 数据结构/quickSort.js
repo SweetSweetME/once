@@ -74,6 +74,8 @@ function fn(arr) {
     return [...fn(left), baseValue, ...fn(right)];
 }
 
+// 复习还是一次性写不出来 原因就是start end 要覆盖掉函数内所有的"起止" 边界线 不然会引起堆栈溢出
+// 这次虽然记住来 baseValue j 的初始值 i 的 最大值 但没有记住i的初始值
 
 
 
