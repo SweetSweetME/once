@@ -249,3 +249,25 @@ Promise {<resolved>: undefined}
 promise resolve状态 将内部第二个then里的回调放进 微任务队列 
 但是先进先出  【回调执行时 如果有新的promise 可以当作是同步代码 好理解一点 异步里的同步 😄 】
 先执行 外部的第二个then里的回调 再执行 内部的第二个then的回调 最终微任务队列为空 执行完毕！✌️
+
+再加点注释： 
+```
+new Promise((resolve, reject)=>{
+		console.log('promise 2');
+		resolve();
+	}).then(()=>{
+		console.log('then 21');
+	})
+	.then(()=>{
+		console.log('then 23');
+	})
+```
+1. 执行resolve时 将第一个then里的回调放进 微任务队列  
+2. 这时相对同步代码才算执行完毕 也就是【外层第一个then里的回调执行完毕 返回Promise.resolve 】
+3. 将外层第二个then里的回调放进 微任务队列 同步都完成 
+4. 事件循环取出先进去的回调 执行 那么内部第二个then里的回调放进微任务队列 依次执行
+记住几点：
+1. then是同步执行的 但是只负责注册 回调【异步操作】
+2. Promise.resolve 是将回调 放入事件队列里面的 只有放的动作 【现在的实验仅限于 then 的第一个参数 对应 resolve】
+3. 事件循环 将回调从 事件队列中取出来 执行 直到微任务队列完毕  
+4. 微任务与微任务之间没有特权 谁先进 谁先被执行
