@@ -15,6 +15,6 @@ promise.race()
     
 Promise.resolve() 成功状态
 Promise.reject() 失败状态
-Promise.then(函数1 success, 函数2 error)
-Promise.catch(error)
-Promise.finally()总会执行
+Promise.prototype.then(函数1 success, 函数2 error)
+Promise.prototype.catch(error)
+Promise.prototype.finally()总会执行
