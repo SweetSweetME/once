@@ -1,10 +1,12 @@
 ```javascript
-// ES5 6种继承
+// ES5 6种继承之原型链继承
+// 缺点：1. 继承的属性 一个修改 都会被影响
+        2. 无法向父级【超类传递初始化参数】 详请 查本文件diff 可看
 // 1. 原型链继承
 // 继承想要继承什么 属性 方法 
-function PersonFemale() {
+function PersonFemale(hobby = ['唱歌', '敷面膜', '瑜伽']) {
     this.sex = 'female';
-    this.hobby = ['唱歌', '敷面膜', '瑜伽'];
+    this.hobby = [...hobby];
     this.getSex = function () {
         return this.sex;
     }
@@ -27,7 +29,8 @@ var p = new PersonFemale();
 // console.log(p.todo);
 // console.log(p.getSex());
 
-function Student() {
+function Student(hobby) {
+    console.log(hobby);
     this.type = 'student';
     // this.hobby = ['学习'];
     this.getType = function () {
@@ -72,7 +75,7 @@ let lisa = new Student();
 lisa.hobby.push('lisa新加了一个爱好');
 lisa.todo.push('lisa有新的todo');
 
-let lay = new Student();
+let lay = new Student(['lay传递参数初始化hobby']);
 lay.hobby.push('lay新加了一个爱好');
 lay.todo.push('lay有新的todo');
 lay.type = 'Student三好学生';
@@ -92,6 +95,9 @@ console.log(Student.prototype.construtor);
 // 原型属性是共享的 那么 同时改变 是可以 的  但是原来父级的实例属性 最好不共享
 // 那么为什么会共享呢？ 因为是一个实例【引用类型】 赋值给了Student.prototype
 
+// undefined
+// undefined
+// ['lay传递参数初始化hobby']
 // bell: ['唱歌', '敷面膜', '瑜伽', 'bell新加了一个爱好', 'lisa新加了一个爱好', 'lay新加了一个爱好']
 // bell: ['郊游', 'bell有新的TODO', 'lisa有新的todo', 'lay有新的todo']
 // bell: student
@@ -101,4 +107,5 @@ console.log(Student.prototype.construtor);
 // lisa: ['唱歌', '敷面膜', '瑜伽', 'bell新加了一个爱好', 'lisa新加了一个爱好', 'lay新加了一个爱好']
 // lisa: ['郊游', 'bell有新的TODO', 'lisa有新的todo', 'lay有新的todo']
 // lisa: student
+// [Function: Student]
 ```
