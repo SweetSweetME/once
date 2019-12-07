@@ -27,7 +27,9 @@ true
 ```
 
 ```javascript
+
 -toString 默认调用 join 方法 将join方法写成了shift 方法 注意需要是Array.prototype 的方法-
+
 arr.join = arr.shift; 这样是可以的！！！之前测试时可能哪个地方出现问题 没看出来 但不是这个的问题 因为无意间又试了一下 没问题🆗
 
 var arr = [1, 2, 3];
